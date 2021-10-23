@@ -36,7 +36,6 @@ public class Game {
         int n1 = scanner.nextInt() - 1;
         int n2  = scanner.nextInt() - 1;
         human.changePosition(n1, n2);
-
     }
 
     public void goblinTurn(){
@@ -53,10 +52,10 @@ public class Game {
             System.out.println("Combat initiated");
             while(goblin.health > 0 && human.health > 0){
                 System.out.println("Round: " + round);
-                System.out.println("Human attack: ");
+                System.out.println("Human attacked: ");
                 goblin.decreaseHealth(human.attack());
                 System.out.println(goblin.toString());
-                System.out.println("Goblin attack");
+                System.out.println("Goblin attacked");
                 human.decreaseHealth(goblin.attack());
                 System.out.println(human.toString());
                 round++;

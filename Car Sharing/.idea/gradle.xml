@@ -10,6 +10,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Topics/Collectors/ASCII Art" />
+            <option value="$PROJECT_DIR$/Topics/Collectors/Set average" />
+            <option value="$PROJECT_DIR$/Topics/Collectors/Theory" />
             <option value="$PROJECT_DIR$/Topics/Comparator/Most valuable items" />
             <option value="$PROJECT_DIR$/Topics/Comparator/Multiple fields" />
             <option value="$PROJECT_DIR$/Topics/Comparator/Odd and even" />
@@ -36,6 +39,12 @@
             <option value="$PROJECT_DIR$/Topics/Stream filtering/Numbers filtering" />
             <option value="$PROJECT_DIR$/Topics/Stream filtering/Omitting long strings" />
             <option value="$PROJECT_DIR$/Topics/Stream filtering/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Streams of primitives/A stream without zero" />
+            <option value="$PROJECT_DIR$/Topics/Streams of primitives/The average salary" />
+            <option value="$PROJECT_DIR$/Topics/Streams of primitives/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Taking elements/Secret codes" />
+            <option value="$PROJECT_DIR$/Topics/Taking elements/Sorting and skipping numbers" />
+            <option value="$PROJECT_DIR$/Topics/Taking elements/Theory" />
             <option value="$PROJECT_DIR$/util" />
           </set>
         </option>

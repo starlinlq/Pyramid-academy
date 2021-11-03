@@ -6,3 +6,6 @@ content:
 - Stream filtering
 - Map and flatMap
 - Reduction methods
+- Collectors
+- Streams of primitives
+- Taking elements

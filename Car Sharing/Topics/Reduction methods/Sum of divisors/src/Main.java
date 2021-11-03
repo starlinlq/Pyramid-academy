@@ -1,3 +1,4 @@
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.stream.*;
 
@@ -16,6 +17,7 @@ public class Main {
      */
     public static int sum(int a, int b, int n, int m) {
         // write your code here
+
         return IntStream.range(a, b + 1).filter(number-> number % n == 0 || number % m == 0).sum();
     }
 

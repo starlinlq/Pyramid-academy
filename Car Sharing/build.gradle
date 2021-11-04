@@ -12,11 +12,11 @@ subprojects {
 
     repositories {
         mavenCentral()
-
         maven { url "https://jitpack.io" }
     }
 
     dependencies {
+        implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
         testImplementation 'com.github.hyperskill:hs-test:release-SNAPSHOT'
     }
 
@@ -39,15 +39,6 @@ subprojects {
     }
 }
 
-project(':util') {
-    dependencies {
-        implementation 'com.github.hyperskill:hs-test:release-SNAPSHOT'
-    }
-}
-
-configure(subprojects.findAll { it.name != 'util' }) {
-    dependencies {
-        testImplementation project(':util').sourceSets.main.output
-        testImplementation project(':util').sourceSets.test.output
-    }
+wrapper {
+    gradleVersion = '7.1.1'
 }

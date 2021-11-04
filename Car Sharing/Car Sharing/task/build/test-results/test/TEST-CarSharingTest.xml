@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CarSharingTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-04T16:38:44" hostname="Starlins-MBP.attlocal.net" time="0.484">
+  <properties/>
+  <testcase name="start" classname="CarSharingTest" time="0.484"/>
+  <system-out><![CDATA[?[1;31m
+Start test 1?[0m
+Connecting to database
+?[1;31m
+Start test 2?[0m
+Connecting to database
+Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT,  NAME VARCHAR(255)); [42101-200]
+?[1;31m
+Start test 3?[0m
+?[1;31m
+Start test 4?[0m
+?[1;31m
+Start test 5?[0m
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

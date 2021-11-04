@@ -9,3 +9,7 @@ content:
 - Collectors
 - Streams of primitives
 - Taking elements
+- Infinite streams
+- Stream pipelines
+- Parallel streams
+- Grouping collectors

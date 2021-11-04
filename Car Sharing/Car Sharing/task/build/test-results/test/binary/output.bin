@@ -1,0 +1,14 @@
+[1;31m
+Start test 1[0m
+Connecting to database
+[1;31m
+Start test 2[0m
+Connecting to database
+/Table "COMPANY" already exists; SQL statement:
+>CREATE TABLE COMPANY(ID INT,  NAME VARCHAR(255)); [42101-200]
+[1;31m
+Start test 3[0m
+[1;31m
+Start test 4[0m
+[1;31m
+Start test 5[0m

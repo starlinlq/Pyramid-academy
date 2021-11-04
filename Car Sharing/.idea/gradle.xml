@@ -5,11 +5,13 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Car Sharing/task" />
             <option value="$PROJECT_DIR$/Topics/Collectors/ASCII Art" />
             <option value="$PROJECT_DIR$/Topics/Collectors/Set average" />
             <option value="$PROJECT_DIR$/Topics/Collectors/Theory" />
@@ -23,6 +25,11 @@
             <option value="$PROJECT_DIR$/Topics/Functional data processing with streams/Count passwords" />
             <option value="$PROJECT_DIR$/Topics/Functional data processing with streams/Print elements of a stream" />
             <option value="$PROJECT_DIR$/Topics/Functional data processing with streams/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Grouping collectors/Counting clicks" />
+            <option value="$PROJECT_DIR$/Topics/Grouping collectors/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Infinite streams/Generating cats" />
+            <option value="$PROJECT_DIR$/Topics/Infinite streams/Powers of two" />
+            <option value="$PROJECT_DIR$/Topics/Infinite streams/Theory" />
             <option value="$PROJECT_DIR$/Topics/Map and flatMap/Maximum of the absolute values" />
             <option value="$PROJECT_DIR$/Topics/Map and flatMap/Theory" />
             <option value="$PROJECT_DIR$/Topics/Optional/Check an Optional value" />
@@ -30,6 +37,10 @@
             <option value="$PROJECT_DIR$/Topics/Optional/Sum up optional values" />
             <option value="$PROJECT_DIR$/Topics/Optional/The address book" />
             <option value="$PROJECT_DIR$/Topics/Optional/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Parallel streams/Fix the sorting order" />
+            <option value="$PROJECT_DIR$/Topics/Parallel streams/Inverting streams" />
+            <option value="$PROJECT_DIR$/Topics/Parallel streams/Prime numbers" />
+            <option value="$PROJECT_DIR$/Topics/Parallel streams/Theory" />
             <option value="$PROJECT_DIR$/Topics/Reduction methods/Calculating factorials" />
             <option value="$PROJECT_DIR$/Topics/Reduction methods/Range quadratic sum" />
             <option value="$PROJECT_DIR$/Topics/Reduction methods/Sum of divisors" />
@@ -39,6 +50,9 @@
             <option value="$PROJECT_DIR$/Topics/Stream filtering/Numbers filtering" />
             <option value="$PROJECT_DIR$/Topics/Stream filtering/Omitting long strings" />
             <option value="$PROJECT_DIR$/Topics/Stream filtering/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Stream pipelines/The sum of odd numbers" />
+            <option value="$PROJECT_DIR$/Topics/Stream pipelines/The total sum of canceled transactions" />
+            <option value="$PROJECT_DIR$/Topics/Stream pipelines/Theory" />
             <option value="$PROJECT_DIR$/Topics/Streams of primitives/A stream without zero" />
             <option value="$PROJECT_DIR$/Topics/Streams of primitives/The average salary" />
             <option value="$PROJECT_DIR$/Topics/Streams of primitives/Theory" />

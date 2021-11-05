@@ -1,9 +1,7 @@
 package carsharing;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.File;
+import java.sql.*;
 
 public class H2dataBase {
 
@@ -17,6 +15,7 @@ public class H2dataBase {
         String path ="/Users/starlinlq/Desktop/Untitled/Car Sharing/Car Sharing/task/src/carsharing/db/"+ db_name;
         String JBDC_DRIVER = "org.h2.Driver";
         String DB_URL = "jdbc:h2:"+path;
+
 
        try{
            // 1. Register JDBC driver
@@ -45,13 +44,23 @@ public class H2dataBase {
 
     }
 
-    public void handleSql(String sql){
+    public void handleSqlUpdate(String sql){
         try {
             stmt.executeUpdate(sql);
 
         } catch(SQLException ex){
             System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
+    }
+
+    public ResultSet handleSqlQuery(String query){
+        try{
+            return stmt.executeQuery(query);
+        } catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 
 

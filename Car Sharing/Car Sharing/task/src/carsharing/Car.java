@@ -4,11 +4,13 @@ public class Car {
     private String name;
     private int id;
     private int company_id;
+    private boolean is_rented;
 
-    Car(String name, int id, int company_id){
+    Car(String name, int id, int company_id, boolean is_rented){
         this.name = name;
         this.id  = id;
         this.company_id = company_id;
+        this.is_rented = is_rented;
     }
 
     public void setName(String name) {
@@ -33,5 +35,9 @@ public class Car {
 
     public void setCompany_id(int company_id) {
         this.company_id = company_id;
+    }
+
+    public boolean is_rented() {
+        return is_rented;
     }
 }

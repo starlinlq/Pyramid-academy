@@ -25,4 +25,14 @@ public class CarCollection implements ICarCollection{
     public void addCar(Car car){
         this.list.add(car);
     }
+
+    @Override
+    public Car getSingleCar(int id){
+        return null;
+    }
+
+    @Override
+    public void clearCar(){
+        this.list.clear();
+    }
 }

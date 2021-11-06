@@ -1,118 +1,182 @@
-2021-11-05 13:04:49 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLNonTransientException: Method is only allowed for a query. Use execute or executeUpdate instead of executeQuery; SQL statement:
-ALTER TABLE car ALTER COLUMN ID RESTART WITH 1 [90002-200]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
-	at org.h2.message.DbException.get(DbException.java:205)
-	at org.h2.message.DbException.get(DbException.java:181)
-	at org.h2.message.DbException.get(DbException.java:170)
-	at org.h2.command.Prepared.query(Prepared.java:231)
-	at org.h2.command.CommandContainer.query(CommandContainer.java:285)
-	at org.h2.command.Command.executeQuery(Command.java:195)
-	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:85)
-	at carsharing.H2dataBase.handleSqlQuery(H2dataBase.java:59)
-	at carsharing.Main.main(Main.java:36)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.hyperskill.hstest.testing.execution.MainMethodExecutor.invokeMain(MainMethodExecutor.java:172)
-	at org.hyperskill.hstest.testing.execution.MainMethodExecutor.lambda$launch$0(MainMethodExecutor.java:199)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-2021-11-05 13:04:49 jdbc[3]: exception
+2021-11-05 19:43:53 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
 CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
-2021-11-05 13:04:49 jdbc[3]: exception
+2021-11-05 19:43:53 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
-CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
-2021-11-05 13:04:49 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLNonTransientException: Method is only allowed for a query. Use execute or executeUpdate instead of executeQuery; SQL statement:
-ALTER TABLE car ALTER COLUMN ID RESTART WITH 1 [90002-200]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
-	at org.h2.message.DbException.get(DbException.java:205)
-	at org.h2.message.DbException.get(DbException.java:181)
-	at org.h2.message.DbException.get(DbException.java:170)
-	at org.h2.command.Prepared.query(Prepared.java:231)
-	at org.h2.command.CommandContainer.query(CommandContainer.java:285)
-	at org.h2.command.Command.executeQuery(Command.java:195)
-	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:85)
-	at carsharing.H2dataBase.handleSqlQuery(H2dataBase.java:59)
-	at carsharing.Main.main(Main.java:36)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.hyperskill.hstest.testing.execution.MainMethodExecutor.invokeMain(MainMethodExecutor.java:172)
-	at org.hyperskill.hstest.testing.execution.MainMethodExecutor.lambda$launch$0(MainMethodExecutor.java:199)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-2021-11-05 13:04:49 jdbc[7]: exception
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:43:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:43:53 jdbc[7]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
 CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
-2021-11-05 13:04:49 jdbc[7]: exception
+2021-11-05 19:43:53 jdbc[7]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
-CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
-2021-11-05 13:04:49 jdbc[7]: exception
-org.h2.jdbc.JdbcSQLNonTransientException: Method is only allowed for a query. Use execute or executeUpdate instead of executeQuery; SQL statement:
-ALTER TABLE car ALTER COLUMN ID RESTART WITH 1 [90002-200]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
-	at org.h2.message.DbException.get(DbException.java:205)
-	at org.h2.message.DbException.get(DbException.java:181)
-	at org.h2.message.DbException.get(DbException.java:170)
-	at org.h2.command.Prepared.query(Prepared.java:231)
-	at org.h2.command.CommandContainer.query(CommandContainer.java:285)
-	at org.h2.command.Command.executeQuery(Command.java:195)
-	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:85)
-	at carsharing.H2dataBase.handleSqlQuery(H2dataBase.java:59)
-	at carsharing.Main.main(Main.java:36)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.hyperskill.hstest.testing.execution.MainMethodExecutor.invokeMain(MainMethodExecutor.java:172)
-	at org.hyperskill.hstest.testing.execution.MainMethodExecutor.lambda$launch$0(MainMethodExecutor.java:199)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-2021-11-05 13:04:50 jdbc[9]: exception
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:43:53 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:43:53 jdbc[9]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
 CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
-2021-11-05 13:04:50 jdbc[9]: exception
+2021-11-05 19:43:54 jdbc[9]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
-CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
-2021-11-05 13:04:50 jdbc[9]: exception
-org.h2.jdbc.JdbcSQLNonTransientException: Method is only allowed for a query. Use execute or executeUpdate instead of executeQuery; SQL statement:
-ALTER TABLE car ALTER COLUMN ID RESTART WITH 1 [90002-200]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
-	at org.h2.message.DbException.get(DbException.java:205)
-	at org.h2.message.DbException.get(DbException.java:181)
-	at org.h2.message.DbException.get(DbException.java:170)
-	at org.h2.command.Prepared.query(Prepared.java:231)
-	at org.h2.command.CommandContainer.query(CommandContainer.java:285)
-	at org.h2.command.Command.executeQuery(Command.java:195)
-	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:85)
-	at carsharing.H2dataBase.handleSqlQuery(H2dataBase.java:59)
-	at carsharing.Main.main(Main.java:36)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.hyperskill.hstest.testing.execution.MainMethodExecutor.invokeMain(MainMethodExecutor.java:172)
-	at org.hyperskill.hstest.testing.execution.MainMethodExecutor.lambda$launch$0(MainMethodExecutor.java:199)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:43:54 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:43:54 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:43:54 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:43:54 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:46:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:46:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:46:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:46:35 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:46:35 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:46:35 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:46:35 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:46:35 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:46:35 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:46:36 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:46:36 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:46:36 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:46:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:46:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:46:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:47:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:47:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:47:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:47:38 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:47:38 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:47:38 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:47:38 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:47:38 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:47:38 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:47:38 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:47:38 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:47:38 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:47:39 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:47:39 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:47:39 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:47:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:47:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:47:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:47:58 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:47:59 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:47:59 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:47:59 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:47:59 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:47:59 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:47:59 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:47:59 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:47:59 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:47:59 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:47:59 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:47:59 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]
+2021-11-05 19:47:59 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-200]
+2021-11-05 19:47:59 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE COMPANY(ID INT NOT NULL AUTO_INCREMENT,  NAME VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY (ID)) [42101-200]
+2021-11-05 19:48:00 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CAR" already exists; SQL statement:
+CREATE TABLE CAR (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE , COMPANY_ID INT NOT NULL, IS_RENTED BOOLEAN DEFAULT FALSE, CONSTRAINT fk_company FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)) [42101-200]
+2021-11-05 19:48:00 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMER" already exists; SQL statement:
+CREATE TABLE CUSTOMER (ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(20) NOT NULL UNIQUE, RENTED_CAR_ID INT, CONSTRAINT FK_CAR FOREIGN KEY (RENTED_CAR_ID) REFERENCES CAR(ID)) [42101-200]

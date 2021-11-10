@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Cinema Room REST Service/task" />
+            <option value="$PROJECT_DIR$/Topics/Exception handling/Four status codes" />
+            <option value="$PROJECT_DIR$/Topics/Exception handling/Implement DELETE endpoint" />
+            <option value="$PROJECT_DIR$/Topics/Exception handling/Improve the program" />
+            <option value="$PROJECT_DIR$/Topics/Exception handling/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Getting data from REST/Add annotations" />
+            <option value="$PROJECT_DIR$/Topics/Getting data from REST/Retrieving specific task" />
+            <option value="$PROJECT_DIR$/Topics/Getting data from REST/Return big JSON" />
+            <option value="$PROJECT_DIR$/Topics/Getting data from REST/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Getting data from REST/Two endpoints" />
+            <option value="$PROJECT_DIR$/Topics/Posting and deleting data via REST/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Posting and deleting data via REST/Web calculator" />
+            <option value="$PROJECT_DIR$/util" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

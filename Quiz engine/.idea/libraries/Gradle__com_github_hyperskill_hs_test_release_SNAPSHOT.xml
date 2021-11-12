@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.hyperskill:hs-test:release-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../hyperSkill/File Server/caches/modules-2/files-2.1/com.github.hyperskill/hs-test/release-SNAPSHOT/c29ccc4c5a265bb51f046b4aeadbf48820208a17/hs-test-release-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../hyperSkill/File Server/caches/modules-2/files-2.1/com.github.hyperskill/hs-test/release-SNAPSHOT/f7db720da4c470384063c05563757c22a71b4971/hs-test-release-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

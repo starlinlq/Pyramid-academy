@@ -2,6 +2,7 @@ package engine.quiz;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import engine.user.User;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
@@ -26,14 +27,40 @@ public class Quiz {
     @ElementCollection
     @Column(name="answer")
     private List<Integer> answer;
+    @JsonIgnore
+    @Column(name = "owner")
+     private String owner;
+
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
     Quiz(){}
 
-    Quiz(String title, String text, String[] options, List<Integer> answer){
+    Quiz(String title, String text, String[] options, List<Integer> answer, User user){
         this.title = title;
         this.text = text;
         this.options = options;
         this.answer = answer == null ? new ArrayList<>() : answer;
+
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public long getId() {

@@ -659,6 +659,266 @@ files:
         }
     }
   learner_created: false
+- name: src/engine/quiz/QuizController.java
+  visible: true
+  text: |
+    package engine.quiz;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.*;
+    import org.springframework.web.server.ResponseStatusException;
+    import javax.validation.Valid;
+    import java.util.*;
+
+
+    @RestController
+    @RequestMapping(path = "/api/quizzes")
+    public class QuizController {
+        private final QuizService quizService;
+
+        @Autowired
+        QuizController(QuizService quizService){
+            this.quizService = quizService;
+        }
+
+        @GetMapping
+        public ResponseEntity<List<Quiz>> getAllQuizzes(){
+            return new ResponseEntity<>(quizService.getAllQuizzes(), HttpStatus.OK);
+        }
+
+        @GetMapping("/{id}")
+        public ResponseEntity<Quiz> getSingleQuiz(@PathVariable int id){
+            Quiz quiz = quizService.getSingleQuiz(id);
+
+           if(quiz != null){
+               System.out.println(quiz.getAnswer().toString());
+               return new ResponseEntity<>(quiz, HttpStatus.OK);
+           } else
+               throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        @PostMapping
+        public ResponseEntity<Quiz> createQuiz(@Valid @RequestBody Quiz quiz){
+            return new ResponseEntity<>(quizService.addQuiz(quiz), HttpStatus.OK);
+        }
+
+        @PostMapping("/{id}/solve")
+        public ResponseEntity<Response> solveQuiz(@PathVariable int id, @RequestBody  HashMap<String, ArrayList<Integer>> answer){
+           Quiz quiz  = quizService.getSingleQuiz(id);
+
+           if(quiz == null ) {
+               return new ResponseEntity<>(new Response(false, "Not Found"), HttpStatus.NOT_FOUND);
+           }
+
+           Response response;
+           var answers = answer.get("answer");
+           boolean isCorrect = false;
+
+           if(quiz.getAnswer().size() == answers.size()){
+               isCorrect =  answers.containsAll(quiz.getAnswer());
+           }
+
+           if(isCorrect){
+               response = new Response(true , "Congratulations, you're right!");
+           } else {
+               response = new Response(false, "Wrong answer! Please, try again.");
+           }
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+
+    }
+  learner_created: true
+- name: src/engine/quiz/QuizRepository.java
+  visible: true
+  text: |
+    package engine.quiz;
+
+    import org.springframework.data.repository.CrudRepository;
+    import org.springframework.stereotype.Repository;
+
+    @Repository
+    public interface QuizRepository extends CrudRepository<Quiz, Long> {
+
+    }
+  learner_created: true
+- name: src/engine/quiz/QuizService.java
+  visible: true
+  text: |
+    package engine.quiz;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Service;
+    import java.util.List;
+    import java.util.Optional;
+
+    @Service
+    public class QuizService {
+        private final QuizRepository quizRepository;
+
+        @Autowired
+        QuizService(QuizRepository quizRepository){
+            this.quizRepository = quizRepository;
+        }
+
+        public List<Quiz> getAllQuizzes(){
+            return (List<Quiz>) quizRepository.findAll();
+        }
+
+        public Quiz getSingleQuiz(long id){
+            Optional<Quiz> quiz = quizRepository.findById(id);
+           return quiz.orElse(null);
+
+        }
+
+        public Quiz addQuiz(Quiz quiz){
+            quizRepository.save(quiz);
+            return quiz;
+        }
+    }
+  learner_created: true
+- name: src/engine/quiz/Quiz.java
+  visible: true
+  text: |
+    package engine.quiz;
+
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+    import com.fasterxml.jackson.annotation.JsonProperty;
+    import org.hibernate.annotations.Table;
+
+    import javax.persistence.*;
+    import javax.validation.constraints.*;
+    import java.util.ArrayList;
+    import java.util.List;
+
+    @Entity
+    public class Quiz {
+        @Id
+        @GeneratedValue
+        private long id;
+        @Column(name="title")
+        @Pattern(regexp = "[A-Za-z](\\w\\s?,?.?!?)+")
+        private String title;
+        @Column(name="text")
+        @Pattern(regexp = "[A-Za-z](\\w\\s?,?.?!?)+")
+        private String text;
+        @Column(name="options")
+        @Size(min = 2)
+        private String[] options;
+        @ElementCollection
+        @Column(name="answer")
+        private List<Integer> answer;
+
+        Quiz(){}
+
+        Quiz(String title, String text, String[] options, List<Integer> answer){
+            this.title = title;
+            this.text = text;
+            this.options = options;
+            this.answer = answer == null ? new ArrayList<>() : answer;
+        }
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        @JsonIgnore
+        public List<Integer> getAnswer() {
+            return answer == null ? new ArrayList<>(): answer;
+        }
+        @JsonProperty("answer")
+        public void setAnswer(List<Integer> answer) {
+            this.answer = answer == null ? new ArrayList<>() : answer;
+        }
+
+        public String getTitle(){
+            return this.title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getText(){
+            return this.text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public String[] getOptions(){
+            return this.options;
+        }
+
+        public void setOptions(String[] options) {
+            this.options = options;
+        }
+    }
+  learner_created: true
+- name: src/engine/user/User.java
+  visible: true
+  learner_created: true
+- name: src/engine/user/UserRepository.java
+  visible: true
+  learner_created: true
+- name: src/engine/user/Controller.java
+  visible: true
+  learner_created: true
+- name: src/engine/user/UserService.java
+  visible: true
+  learner_created: true
+- name: src/engine/Response.java
+  visible: true
+  text: |
+    package engine.quiz;
+
+    public class Response {
+        private boolean success;
+        private String feedback;
+
+        Response(){};
+        Response(boolean success, String feedback){
+            this.success = success;
+            this.feedback = feedback;
+        }
+
+
+        public void setSuccess(boolean success){
+            this.success = success;
+        }
+
+        public void setFeedback(String feedback){
+            this.feedback = feedback;
+        }
+
+        public boolean isSuccess() {
+            return success;
+        }
+
+        public String getFeedback(){
+            return this.feedback;
+        }
+    }
+  learner_created: true
+- name: src/engine/config/WebSecurityConfigurerImpl.java
+  visible: true
+  learner_created: true
+- name: src/engine/user/UserDetailsImpl.java
+  visible: true
+  learner_created: true
+- name: src/engine/user/UserDetailsServiceImpl.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/91/stages/508/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Tue, 16 Nov 2021 00:33:11 UTC
+record: 5

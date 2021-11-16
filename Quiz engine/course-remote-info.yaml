@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/287312/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: Fri, 12 Nov 2021 22:28:08 UTC
+update_date: Tue, 16 Nov 2021 16:13:59 UTC
 stages:
 - id: 504
   step: 8252
@@ -19,7 +19,7 @@ stages:
   is_completed: true
 - id: 508
   step: 8256
-  is_completed: false
+  is_completed: true
 - id: 509
   step: 8257
   is_completed: false
@@ -236,6 +236,8 @@ topics:
   - title: Boxing and unboxing
     theory_id: 3595
   1:
+  - title: IoC Container
+    theory_id: 16851
   - title: Spring beans
     theory_id: 14641
   - title: Spring components
@@ -317,8 +319,6 @@ topics:
   - title: Anonymous classes
     theory_id: 11896
   4:
-  - title: Getting authenticated user details
-    theory_id: 16710
   - title: Web security, OWASP
     theory_id: 14755
   - title: Getting started with Spring Security
@@ -329,6 +329,8 @@ topics:
     theory_id: 15269
   - title: Custom User Store
     theory_id: 16191
+  - title: Getting authenticated user details
+    theory_id: 16710
   - title: Authentication and Authorization
     theory_id: 14219
   - title: Polymorphism

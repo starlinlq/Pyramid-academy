@@ -1,15 +1,14 @@
-package engine.quiz;
+package engine;
 
 public class Response {
     private boolean success;
     private String feedback;
 
-    Response(){};
-    Response(boolean success, String feedback){
+    public Response(){};
+    public Response(boolean success, String feedback){
         this.success = success;
         this.feedback = feedback;
     }
-
 
     public void setSuccess(boolean success){
         this.success = success;

@@ -1,7 +1,13 @@
 package engine.quiz;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +20,11 @@ public class QuizService {
         this.quizRepository = quizRepository;
     }
 
-    public List<Quiz> getAllQuizzes(){
-        return (List<Quiz>) quizRepository.findAll();
+    public Page<Quiz> getAllQuizzes(int page, int pageSize){
+        Pageable paging =  PageRequest.of(page, 10);
+
+        Page<Quiz> pageResult = quizRepository.findAll(paging);
+        return pageResult;
     }
 
     public Quiz getSingleQuiz(long id){
@@ -23,9 +32,6 @@ public class QuizService {
        return quiz.orElse(null);
     }
 
-    public List<Quiz> getAllByOwner(String email){
-        return quizRepository.getAllByOwner(email);
-    }
 
     public Quiz addQuiz(Quiz quiz){
 

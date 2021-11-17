@@ -1,9 +1,9 @@
 package engine.user;
 
+import engine.completedQuiz.Completed;
 import engine.quiz.Quiz;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -23,9 +23,10 @@ public class User {
     private String password;
     @Column(name = "role")
     private String role;
-    @OneToMany
-    @JoinColumn(name = "UserID")
+    @OneToMany(mappedBy = "user")
     private List<Quiz> quizzes = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Completed> completedList = new ArrayList<>();
 
     public User(){}
     public User(String email, String password){
@@ -63,6 +64,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<Completed> getCompletedList() {
+        return completedList;
+    }
+
+    public void setCompletedList(List<Completed> completedList) {
+        this.completedList = completedList;
     }
 
     public List<Quiz> getQuizList() {

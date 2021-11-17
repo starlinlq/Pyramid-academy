@@ -1396,6 +1396,19 @@ files:
         }
     }
   learner_created: true
+- name: src/engine/completedQuiz/Completed.java
+  visible: true
+  learner_created: true
+- name: src/engine/completedQuiz/CompletedService.java
+  visible: true
+  learner_created: true
+- name: src/engine/completedQuiz/CompletedRepo.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/91/stages/509/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+    Academy</a> to continue learning.
+  time: Wed, 17 Nov 2021 20:44:37 UTC
 record: -1

@@ -5,16 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1353cb65-8aa0-49f4-926e-b9cfb3aa8058" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_security_2_2_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_security_spring_security_config_5_2_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_security_spring_security_core_5_2_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_security_spring_security_web_5_2_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/config/WebSecurityConfigurerImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/user/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/user/UserDetailsImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/user/UserDetailsServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/user/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/user/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/boardingPass/BoardingPass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/boardingPass/BoardingPassController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/boardingPass/BoardingPassRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/boardingPass/BoardingPassService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/config/CustomSecurity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/customResponse/CustomResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/customResponse/iCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/user/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/user/UserDetailsImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/user/UserDetailsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/user/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/user/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -23,24 +25,15 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/frameworkLessonHistory/storage.storageData" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/frameworkLessonHistory/storage.storageData" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/frameworkLessonHistory/storage.storageRecordIndex" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/frameworkLessonHistory/storage.storageRecordIndex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_hyperskill_hs_test_release_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_hyperskill_hs_test_release_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/Web Quiz Engine/task/Web_Quiz_Engine.Web_Quiz_Engine-task.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/Web Quiz Engine/task/Web_Quiz_Engine.Web_Quiz_Engine-task.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/Web Quiz Engine/task/Web_Quiz_Engine.Web_Quiz_Engine-task.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/Web Quiz Engine/task/Web_Quiz_Engine.Web_Quiz_Engine-task.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/Advanced queries/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/Advanced queries/task-info.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/Moving quizzes to DB/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/Moving quizzes to DB/task-info.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/User authorization/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/User authorization/task-info.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/lesson-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/lesson-info.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/quiz/Quiz.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/quiz/Quiz.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/quiz/QuizController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/quiz/QuizController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/quiz/QuizRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/quiz/QuizRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/quiz/QuizService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/quiz/QuizService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/quiz/Response.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/user/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/user/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/user/UserDetailsImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/main/engine/user/UserDetailsImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/test/tests/WebQuizEngineTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/build/classes/java/test/tests/WebQuizEngineTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/build/reports/tests/test/classes/tests.WebQuizEngineTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/build/reports/tests/test/classes/tests.WebQuizEngineTest.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/build/reports/tests/test/index.html" afterDir="false" />
@@ -55,15 +48,20 @@
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/quiz/QuizController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/quiz/QuizController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/quiz/QuizRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/quiz/QuizRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/quiz/QuizService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/quiz/QuizService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/quiz/Response.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/WebQuizEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/WebQuizEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/user/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/user/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/user/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/user/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/user/UserDetailsImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/out/production/classes/engine/user/UserDetailsImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/quiz/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/quiz/Quiz.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/quiz/QuizController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/quiz/QuizController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/quiz/QuizRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/quiz/QuizRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/quiz/QuizService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/quiz/QuizService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/quiz/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/test/tests/WebQuizEngineTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/test/tests/WebQuizEngineTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/user/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/task/src/engine/user/UserDetailsImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course-remote-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/course-remote-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyramidAir/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../pyramidAir/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/PyramidAirApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/PyramidAirApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../pyramidAir/src/main/java/com/pyramidAcademy/pyramidAir/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pyramidairdb.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../pyramidairdb.mv.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,8 +76,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -95,7 +93,9 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="20kVTdVWt0HQWsSIKJrAIheKBG0" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -105,8 +105,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="show.inlinked.gradle.project.popup" value="false" />
   </component>
   <component name="RunManager">

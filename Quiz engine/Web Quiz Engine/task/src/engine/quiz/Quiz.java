@@ -27,23 +27,11 @@ public class Quiz {
     @ElementCollection
     @Column(name="answer")
     private List<Integer> answer;
+
     @JsonIgnore
-    @Column(name = "owner")
-     private String owner;
-
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
 
     Quiz(){}
 
@@ -54,6 +42,7 @@ public class Quiz {
         this.answer = answer == null ? new ArrayList<>() : answer;
 
     }
+
 
     public User getUser() {
         return user;

@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/287312/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: Sat, 27 Nov 2021 21:43:12 UTC
+update_date: Tue, 30 Nov 2021 21:50:05 UTC
 stages:
 - id: 504
   step: 8252
@@ -159,6 +159,8 @@ topics:
     theory_id: 3523
   - title: Final variables
     theory_id: 7427
+  - title: Introduction to software architecture
+    theory_id: 15368
   - title: IntelliJ IDEA
     theory_id: 3801
   - title: Pseudocode
@@ -197,6 +199,8 @@ topics:
     theory_id: 7917
   - title: Dependency management
     theory_id: 5076
+  - title: MVC
+    theory_id: 17197
   - title: Threads as objects
     theory_id: 4875
   - title: Custom threads

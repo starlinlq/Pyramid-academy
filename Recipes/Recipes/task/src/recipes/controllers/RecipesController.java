@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import recipes.entity.Recipe;
 import recipes.services.RecipeService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/recipe")
 public class RecipesController {
@@ -27,11 +29,21 @@ public class RecipesController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Response> createRecipe(@RequestBody Recipe newRecipe){
+    public ResponseEntity<Response> createRecipe(@Valid @RequestBody Recipe newRecipe){
         Response response = new Response();
         response.setId(recipeService.save(newRecipe).getId());
         return ResponseEntity.ok().body(response);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteRecipe(@PathVariable long id){
+        if(recipeService.deleteRecipeById(id)){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+
 }
 
 

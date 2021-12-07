@@ -6,6 +6,14 @@
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
+          <entry name="$PROJECT_DIR$/../../hyperSkill/File Server/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.22/9c08ea24c6eb714e2d6170e8122c069a0ba9aacf/lombok-1.18.22.jar" />
+        </processorPath>
+        <module name="Recipes.Recipes-task.test" />
+        <module name="Recipes.Recipes-task.main" />
+      </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
           <entry name="$PROJECT_DIR$/../../hyperSkill/File Server/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.16/6dc192c7f93ec1853f70d59d8a6dcf94eb42866/lombok-1.18.16.jar" />
         </processorPath>
         <module name="Recipes.Recipes-task-build-classes-java.main" />
@@ -13,31 +21,15 @@
         <module name="Recipes.Recipes-task-build-generated-sources-headers-java.main" />
         <module name="Recipes.Recipes-task-build-generated-sources-annotationProcessor-java.test" />
         <module name="Recipes.Recipes-task-build-tmp.test" />
-        <module name="Recipes.Topics-HashMap-Countries_and_capitals.test" />
-        <module name="Recipes.Topics-HashMap-Theory.test" />
-        <module name="Recipes.Topics-HashMap-Countries_and_capitals.main" />
         <module name="Recipes.Recipes-task-build-classes-java.test" />
         <module name="Recipes.Recipes-task-build-reports-tests.main" />
-        <module name="Recipes.Topics-HashMap-Theory.main" />
         <module name="Recipes.Recipes-task-build-generated-sources-annotationProcessor-java.main" />
         <module name="Recipes.util.test" />
         <module name="Recipes.Recipes-task-build-tmp.main" />
-        <module name="Recipes.Topics-HashMap-The_same_pairs.test" />
         <module name="Recipes.Recipes-task-build-generated-sources-headers-java.test" />
         <module name="Recipes.Recipes-task-build-test-results.main" />
-        <module name="Recipes.Topics-HashMap-Remove_long_names.main" />
-        <module name="Recipes.Topics-HashMap-The_same_pairs.main" />
         <module name="Recipes.Recipes-task-build-test-results.test" />
-        <module name="Recipes.Topics-HashMap-Remove_long_names.test" />
         <module name="Recipes.util.main" />
-      </profile>
-      <profile name="Gradle Imported" enabled="true">
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$PROJECT_DIR$/../../hyperSkill/File Server/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.22/9c08ea24c6eb714e2d6170e8122c069a0ba9aacf/lombok-1.18.22.jar" />
-        </processorPath>
-        <module name="Recipes.Recipes-task.test" />
-        <module name="Recipes.Recipes-task.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="17">
@@ -48,10 +40,6 @@
       <module name="Recipes.Recipes-task-build-test-results.main" target="11" />
       <module name="Recipes.Recipes-task-build-tmp.main" target="11" />
       <module name="Recipes.Recipes-task.main" target="11" />
-      <module name="Recipes.Topics-HashMap-Countries_and_capitals.main" target="11" />
-      <module name="Recipes.Topics-HashMap-Remove_long_names.main" target="11" />
-      <module name="Recipes.Topics-HashMap-The_same_pairs.main" target="11" />
-      <module name="Recipes.Topics-HashMap-Theory.main" target="11" />
       <module name="Recipes.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>

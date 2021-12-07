@@ -6,9 +6,14 @@ files:
     package recipes;
 
     import org.springframework.boot.SpringApplication;
+    import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
     import org.springframework.boot.autoconfigure.SpringBootApplication;
+    import org.springframework.boot.autoconfigure.domain.EntityScan;
+    import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+    import org.springframework.scheduling.annotation.EnableAsync;
 
     @SpringBootApplication
+    @EnableAsync
     public class RecipesApplication {
         public static void main(String[] args) {
             SpringApplication.run(RecipesApplication.class, args);
@@ -17,10 +22,24 @@ files:
   learner_created: false
 - name: resources/application.properties
   visible: true
-  text: |-
-    server.port=8881
+  text: |2
+
     management.endpoints.web.exposure.include=*
     management.endpoint.shutdown.enabled=true
+    endpoints.shutdown.enabled=true
+    server.port=8080
+    # data base settings
+    spring.datasource.url=jdbc:h2:file:../recipes_db
+    spring.datasource.driverClassName=org.h2.Driver
+    spring.datasource.username=starlinlq
+    spring.datasource.password=password
+
+    spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+    spring.jpa.hibernate.ddl-auto=update
+
+    spring.h2.console.enabled=true
+    spring.h2.console.settings.trace=false
+    spring.h2.console.settings.web-allow-others=false
   learner_created: false
 - name: build.gradle
   visible: true
@@ -48,9 +67,173 @@ files:
     sourceSets.main.resources.srcDirs = ["src/resources"]
 
     dependencies {
+
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
         implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.6'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'com.h2database:h2'
+        compileOnly 'org.projectlombok:lombok:1.18.22'
+        annotationProcessor 'org.projectlombok:lombok:1.18.22'
+        testCompileOnly 'org.projectlombok:lombok:1.18.22'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    }
+  learner_created: false
+- name: src/recipes/entity/Recipe.java
+  visible: true
+  text: |
+    package recipes.entity;
+
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+    import lombok.AllArgsConstructor;
+    import lombok.Data;
+    import lombok.NoArgsConstructor;
+    import org.hibernate.annotations.Fetch;
+
+    import javax.persistence.*;
+    import javax.validation.constraints.NotBlank;
+    import javax.validation.constraints.Size;
+    import java.util.List;
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Entity
+    @Table(name="TBL_RECIPE")
+    public class Recipe {
+       @JsonIgnore
+       @Id
+       @SequenceGenerator(name = "recipe_sequence", sequenceName = "recipe_sequence", allocationSize = 1)
+       @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recipe_sequence")
+       private long id;
+       @NotBlank
+       private String name;
+       @NotBlank
+       private String description;
+       @Size(min = 1)
+       @ElementCollection
+       private List<String> ingredients;
+       @Size(min = 1)
+       @ElementCollection
+       private List<String> directions;
+    }
+  learner_created: false
+- name: src/recipes/services/RecipeService.java
+  visible: true
+  text: |
+    package recipes.services;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Service;
+    import recipes.entity.Recipe;
+    import recipes.repositories.RecipeRepo;
+
+    import java.util.Optional;
+
+    @Service
+    public class RecipeService {
+
+      @Autowired
+      private RecipeRepo repo;
+
+        public Recipe save(Recipe recipe){
+          return repo.save(recipe);
+        }
+
+        public Recipe getSingleRecipe(long id){
+            Optional<Recipe> recipeOptional= repo.findById(id);
+            return recipeOptional.orElse(null);
+        }
+
+
+        public boolean deleteRecipeById(long id){
+
+           if(repo.existsById(id)){
+               repo.deleteById(id);
+               return true;
+           }
+
+           return false;
+        }
+
+    }
+  learner_created: false
+- name: src/recipes/repositories/RecipeRepo.java
+  visible: true
+  text: |
+    package recipes.repositories;
+
+    import org.springframework.data.jpa.repository.JpaRepository;
+    import org.springframework.stereotype.Repository;
+    import recipes.entity.Recipe;
+
+    @Repository
+    public interface RecipeRepo extends JpaRepository<Recipe, Long> {
+    }
+  learner_created: false
+- name: src/recipes/controllers/RecipesController.java
+  visible: true
+  text: |
+    package recipes.controllers;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.*;
+    import recipes.entity.Recipe;
+    import recipes.services.RecipeService;
+
+    import javax.validation.Valid;
+
+    @RestController
+    @RequestMapping("/api/recipe")
+    public class RecipesController {
+        private final RecipeService recipeService;
+
+        @Autowired
+        RecipesController(RecipeService recipeService){
+            this.recipeService = recipeService;
+        }
+
+        @GetMapping("/{id}")
+        public ResponseEntity<Recipe> getSingleRecipe(@PathVariable long id){
+            Recipe recipe = recipeService.getSingleRecipe(id);
+            if(recipe != null){
+                return ResponseEntity.ok(recipe);
+            } else
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
+        @PostMapping("/new")
+        public ResponseEntity<Response> createRecipe(@Valid @RequestBody Recipe newRecipe){
+            Response response = new Response();
+            response.setId(recipeService.save(newRecipe).getId());
+            return ResponseEntity.ok().body(response);
+        }
+
+        @DeleteMapping("/{id}")
+        public ResponseEntity<?> deleteRecipe(@PathVariable long id){
+            if(recipeService.deleteRecipeById(id)){
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+
+    }
+
+
+    class Response{
+        private long id;
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
     }
   learner_created: false
 - name: test/RecipesApplicationTest.java
@@ -634,6 +817,6 @@ files:
         }
     }
   learner_created: false
-feedback_link: https://hyperskill.org/learn/step/13091#comment
+feedback_link: https://hyperskill.org/projects/180/stages/920/implement#comment
 status: Unchecked
 record: -1

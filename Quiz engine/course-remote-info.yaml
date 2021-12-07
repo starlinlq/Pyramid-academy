@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/287312/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: Tue, 30 Nov 2021 21:50:05 UTC
+update_date: Thu, 02 Dec 2021 18:01:44 UTC
 stages:
 - id: 504
   step: 8252
@@ -318,6 +318,8 @@ topics:
     theory_id: 9536
   - title: Application layers
     theory_id: 13971
+  - title: XML
+    theory_id: 6901
   - title: Data and object mapping
     theory_id: 8262
   - title: Introduction to databases

@@ -5,18 +5,69 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1353cb65-8aa0-49f4-926e-b9cfb3aa8058" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/Advanced queries/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/Advanced queries/task-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/Advanced queries/task-remote-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/Advanced queries/task-remote-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/Lots of quizzes/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/Lots of quizzes/task-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/Lots of quizzes/task-remote-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/Lots of quizzes/task-remote-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/Making quizzes more interesting/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/Making quizzes more interesting/task-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/Making quizzes more interesting/task-remote-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/Making quizzes more interesting/task-remote-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/Moving quizzes to DB/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/Moving quizzes to DB/task-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/Moving quizzes to DB/task-remote-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/Moving quizzes to DB/task-remote-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/Solving a simple quiz/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/Solving a simple quiz/task-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/Solving a simple quiz/task-remote-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/Solving a simple quiz/task-remote-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/User authorization/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/User authorization/task-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web Quiz Engine/User authorization/task-remote-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Web Quiz Engine/User authorization/task-remote-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course-remote-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/course-remote-info.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../spring-data-jpa/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-data-jpa/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../spring-data-jpa/src/main/java/com/starlinlq/springdatajpa/entity/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-data-jpa/src/main/java/com/starlinlq/springdatajpa/entity/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.gradle/7.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.gradle/7.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.gradle/7.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.gradle/7.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.gradle/7.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.gradle/7.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.gradle/7.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.gradle/7.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.gradle/7.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.gradle/7.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.idea/frameworkLessonHistory/storage.storageData" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.idea/frameworkLessonHistory/storage.storageData" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.idea/frameworkLessonHistory/storage.storageRecordIndex" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.idea/frameworkLessonHistory/storage.storageRecordIndex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.idea/libraries/Gradle__com_h2database_h2_1_4_200.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.idea/modules/Recipes/task/Recipes.Recipes-task.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.idea/modules/Recipes/task/Recipes.Recipes-task.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/.idea/modules/Recipes/task/Recipes.Recipes-task.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/.idea/modules/Recipes/task/Recipes.Recipes-task.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/Multiple recipes/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/Multiple recipes/task-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/Store a recipe/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/Store a recipe/task-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/lesson-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/lesson-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/main/recipes/RecipesApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/main/recipes/RecipesApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/main/recipes/controllers/RecipesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/main/recipes/controllers/RecipesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/main/recipes/controllers/Response.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/main/recipes/controllers/Response.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/main/recipes/entity/Recipe.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/main/recipes/entity/Recipe.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/main/recipes/services/RecipeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/main/recipes/services/RecipeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/test/RecipesApplicationTest$Recipe.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/test/RecipesApplicationTest$Recipe.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/test/RecipesApplicationTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/classes/java/test/RecipesApplicationTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/reports/tests/test/classes/RecipesApplicationTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/reports/tests/test/classes/RecipesApplicationTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/reports/tests/test/packages/default-package.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/reports/tests/test/packages/default-package.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/test-results/test/TEST-RecipesApplicationTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/test-results/test/TEST-RecipesApplicationTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/test-results/test/binary/output.bin.idx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/test-results/test/binary/results.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/out/production/classes/recipes/RecipesApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/out/production/classes/recipes/RecipesApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/out/production/classes/recipes/controllers/RecipesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/out/production/classes/recipes/controllers/RecipesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/out/production/classes/recipes/entity/Recipe.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/out/production/classes/recipes/entity/Recipe.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/out/production/classes/recipes/services/RecipeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/out/production/classes/recipes/services/RecipeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/src/recipes/RecipesApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/src/recipes/RecipesApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/src/recipes/controllers/RecipesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/src/recipes/controllers/RecipesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/src/recipes/entity/Recipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/src/recipes/entity/Recipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/src/recipes/services/RecipeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/src/recipes/services/RecipeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Recipes/Recipes/task/test/RecipesApplicationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Recipes/Recipes/task/test/RecipesApplicationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +135,7 @@
       <setting name="parameters" value="" />
       <option name="PARENT_ENVS" value="true" />
       <setting name="workingDir" value="" />
+      <setting name="focusEditor" value="false" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -98,6 +150,7 @@
       <setting name="profiles" value="" />
       <setting name="aliases" value="" />
       <setting name="fixLineNumbers" value="false" />
+      <setting name="focusEditor" value="false" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
@@ -109,6 +162,7 @@
       <setting name="replPortFileType" value="STANDARD" />
       <setting name="customPortFile" value="" />
       <setting name="fixLineNumbers" value="false" />
+      <setting name="focusEditor" value="false" />
       <method v="2" />
     </configuration>
     <recent_temporary>

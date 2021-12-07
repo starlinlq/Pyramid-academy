@@ -916,7 +916,7 @@ files:
 - name: src/engine/user/UserDetailsServiceImpl.java
   visible: true
   learner_created: true
-feedback_link: https://hyperskill.org/projects/91/stages/508/implement#comment
+feedback_link: https://hyperskill.org/learn/step/8256#comment
 status: Solved
 feedback:
   message: Congratulations!

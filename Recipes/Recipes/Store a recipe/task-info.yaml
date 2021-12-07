@@ -18,9 +18,21 @@ files:
 - name: resources/application.properties
   visible: true
   text: |-
-    server.port=8881
+    server.port=8080
     management.endpoints.web.exposure.include=*
     management.endpoint.shutdown.enabled=true
+
+    spring.datasource.url=jdbc:h2:file:../recipes_db
+    spring.datasource.driverClassName=org.h2.Driver
+    spring.datasource.username=starlinlq
+    spring.datasource.password=password
+
+    spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+    spring.jpa.hibernate.ddl-auto=update
+
+    spring.h2.console.enabled=true
+    spring.h2.console.settings.trace=false
+    spring.h2.console.settings.web-allow-others=false
   learner_created: false
 - name: build.gradle
   visible: true
@@ -48,9 +60,158 @@ files:
     sourceSets.main.resources.srcDirs = ["src/resources"]
 
     dependencies {
+
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
         implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.6'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'com.h2database:h2'
+        compileOnly 'org.projectlombok:lombok:1.18.22'
+        annotationProcessor 'org.projectlombok:lombok:1.18.22'
+        testCompileOnly 'org.projectlombok:lombok:1.18.22'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    }
+  learner_created: false
+- name: src/recipes/entity/Recipe.java
+  visible: true
+  text: |
+    package recipes.entity;
+
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+    import lombok.AllArgsConstructor;
+    import lombok.Data;
+    import lombok.NoArgsConstructor;
+    import org.hibernate.annotations.Fetch;
+
+    import javax.persistence.*;
+    import javax.validation.constraints.NotBlank;
+    import javax.validation.constraints.Size;
+    import java.util.List;
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Entity
+    @Table(name="TBL_RECIPE")
+    public class Recipe {
+       @JsonIgnore
+       @Id
+       @SequenceGenerator(name = "recipe_sequence", sequenceName = "recipe_sequence", allocationSize = 1)
+       @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recipe_sequence")
+       private long id;
+       @NotBlank
+       private String name;
+       @NotBlank
+       private String description;
+       @Size(min = 1)
+       @ElementCollection
+       private List<String> ingredients;
+       @Size(min = 1)
+       @ElementCollection
+       private List<String> directions;
+    }
+  learner_created: false
+- name: src/recipes/services/RecipeService.java
+  visible: true
+  text: |
+    package recipes.services;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Service;
+    import recipes.entity.Recipe;
+    import recipes.repositories.RecipeRepo;
+
+    import java.util.Optional;
+
+    @Service
+    public class RecipeService {
+
+      @Autowired
+      private RecipeRepo repo;
+
+        public Recipe save(Recipe recipe){
+          return repo.save(recipe);
+        }
+
+        public Recipe getSingleRecipe(long id){
+            Optional<Recipe> recipeOptional= repo.findById(id);
+            return recipeOptional.orElse(null);
+        }
+
+
+        public boolean deleteRecipeById(long id){
+
+           if(repo.existsById(id)){
+               repo.deleteById(id);
+               return true;
+           }
+
+           return false;
+        }
+
+    }
+  learner_created: false
+- name: src/recipes/controllers/RecipesController.java
+  visible: true
+  text: |
+    package recipes.controllers;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.*;
+    import recipes.entity.Recipe;
+    import recipes.services.RecipeService;
+
+    import javax.validation.Valid;
+
+    @RestController
+    @RequestMapping("/api/recipe")
+    public class RecipesController {
+        private final RecipeService recipeService;
+
+        @Autowired
+        RecipesController(RecipeService recipeService){
+            this.recipeService = recipeService;
+        }
+
+        @GetMapping("/{id}")
+        public ResponseEntity<Recipe> getSingleRecipe(@PathVariable long id){
+            Recipe recipe = recipeService.getSingleRecipe(id);
+            if(recipe != null){
+                return ResponseEntity.ok(recipe);
+            } else
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
+        @PostMapping("/new")
+        public ResponseEntity<Response> createRecipe(@Valid @RequestBody Recipe newRecipe){
+            Response response = new Response();
+            response.setId(recipeService.save(newRecipe).getId());
+            return ResponseEntity.ok().body(response);
+        }
+
+        @DeleteMapping("/{id}")
+        public ResponseEntity<?> deleteRecipe(@PathVariable long id){
+            if(recipeService.deleteRecipeById(id)){
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+    class Response{
+        private long id;
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
     }
   learner_created: false
 - name: test/RecipesApplicationTest.java
@@ -308,6 +469,102 @@ files:
         }
     }
   learner_created: false
-feedback_link: https://hyperskill.org/learn/step/13090#comment
-status: Unchecked
-record: -1
+- name: src/recipes/repositories/RecipeRepo.java
+  visible: true
+  text: |
+    package recipes.repositories;
+
+    import org.springframework.data.jpa.repository.JpaRepository;
+    import org.springframework.stereotype.Repository;
+    import recipes.entity.Recipe;
+
+    @Repository
+    public interface RecipeRepo extends JpaRepository<Recipe, Long> {
+    }
+  learner_created: false
+- name: src/recipes/controllers/shutdownController.java
+  visible: true
+  learner_created: true
+feedback_link: https://hyperskill.org/projects/180/stages/919/implement#comment
+status: Failed
+feedback:
+  message: |-
+    Wrong answer in test #6
+
+    GET /api/recipe/1 should respond with status code 200, responded: 404
+
+    Response body:
+
+    Please find below the output of your program during this failed test.
+
+    ---
+
+    .   ____          _            __ _ _
+     /\\ / ___&#39;_ __ _ _(_)_ __  __ _ \ \ \ \
+    ( ( )\___ | &#39;_ | &#39;_| | &#39;_ \/ _` | \ \ \ \
+     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+      &#39;  |____| .__|_| |_|_| |_\__, | / / / /
+     =========|_|==============|___/=/_/_/_/
+     :: Spring Boot ::                (v2.5.6)
+
+    2021-12-02 13:20:15.881  INFO 22376 --- [    Test worker] recipes.RecipesApplication               : Starting RecipesApplication using Java 17 on Starlins-MBP.attlocal.net with PID 22376 (started by starlinlq in /Users/starlinlq/Desktop/Untitled/Recipes/Recipes/task)
+    2021-12-02 13:20:15.883  INFO 22376 --- [    Test worker] recipes.RecipesApplication               : No active profile set, falling back to default profiles: default
+    2021-12-02 13:20:16.950  INFO 22376 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+    2021-12-02 13:20:17.010  INFO 22376 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 48 ms. Found 1 JPA repository interfaces.
+    2021-12-02 13:20:17.705  INFO 22376 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+    2021-12-02 13:20:17.718  INFO 22376 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+    2021-12-02 13:20:17.719  INFO 22376 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.54]
+    2021-12-02 13:20:17.841  INFO 22376 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+    2021-12-02 13:20:17.841  INFO 22376 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1903 ms
+    2021-12-02 13:20:18.126  INFO 22376 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+    2021-12-02 13:20:18.305  INFO 22376 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+    2021-12-02 13:20:18.361  INFO 22376 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+    2021-12-02 13:20:18.426  INFO 22376 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.32.Final
+    2021-12-02 13:20:18.621  INFO 22376 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+    2021-12-02 13:20:18.776  INFO 22376 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+    2021-12-02 13:20:19.489  INFO 22376 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+    2021-12-02 13:20:19.499  INFO 22376 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit &#39;default&#39;
+    2021-12-02 13:20:19.799  WARN 22376 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+    2021-12-02 13:20:20.199  INFO 22376 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path &#39;/actuator&#39;
+    2021-12-02 13:20:20.237  INFO 22376 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path &#39;&#39;
+    2021-12-02 13:20:20.250  INFO 22376 --- [    Test worker] recipes.RecipesApplication               : Started RecipesApplication in 4.711 seconds (JVM running for 5.564)
+    2021-12-02 13:20:20.588  INFO 22376 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet &#39;dispatcherServlet&#39;
+    2021-12-02 13:20:20.588  INFO 22376 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet &#39;dispatcherServlet&#39;
+    2021-12-02 13:20:20.590  INFO 22376 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+    2021-12-02 13:20:20.927  INFO 22376 --- [       Thread-4] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit &#39;default&#39;
+    2021-12-02 13:20:20.927  INFO 22376 --- [       Thread-4] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down&#39;
+    2021-12-02 13:20:20.935  INFO 22376 --- [       Thread-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+    2021-12-02 13:20:20.937  INFO 22376 --- [       Thread-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+      .   ____          _            __ _ _
+     /\\ / ___&#39;_ __ _ _(_)_ __  __ _ \ \ \ \
+    ( ( )\___ | &#39;_ | &#39;_| | &#39;_ \/ _` | \ \ \ \
+     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+      &#39;  |____| .__|_| |_|_| |_\__, | / / / /
+     =========|_|==============|___/=/_/_/_/
+     :: Spring Boot ::                (v2.5.6)
+
+    2021-12-02 13:20:21.038  INFO 22376 --- [    Test worker] recipes.RecipesApplication               : Starting RecipesApplication using Java 17 on Starlins-MBP.attlocal.net with PID 22376 (started by starlinlq in /Users/starlinlq/Desktop/Untitled/Recipes/Recipes/task)
+    2021-12-02 13:20:21.038  INFO 22376 --- [    Test worker] recipes.RecipesApplication               : No active profile set, falling back to default profiles: default
+    2021-12-02 13:20:21.262  INFO 22376 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+    2021-12-02 13:20:21.268  INFO 22376 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 1 JPA repository interfaces.
+    2021-12-02 13:20:21.374  INFO 22376 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+    2021-12-02 13:20:21.375  INFO 22376 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+    2021-12-02 13:20:21.376  INFO 22376 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.54]
+    2021-12-02 13:20:21.409  INFO 22376 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+    2021-12-02 13:20:21.410  INFO 22376 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 370 ms
+    2021-12-02 13:20:21.547  INFO 22376 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+    2021-12-02 13:20:21.552  INFO 22376 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+    2021-12-02 13:20:21.557  INFO 22376 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+    2021-12-02 13:20:21.566  INFO 22376 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+    2021-12-02 13:20:21.620  INFO 22376 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+    2021-12-02 13:20:21.621  INFO 22376 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit &#39;default&#39;
+    2021-12-02 13:20:21.686  WARN 22376 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+    2021-12-02 13:20:21.921  INFO 22376 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path &#39;/actuator&#39;
+    2021-12-02 13:20:21.936  INFO 22376 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path &#39;&#39;
+    2021-12-02 13:20:21.943  INFO 22376 --- [    Test worker] recipes.RecipesApplication               : Started RecipesApplication in 0.924 seconds (JVM running for 7.257)
+    2021-12-02 13:20:21.952  INFO 22376 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet &#39;dispatcherServlet&#39;
+    2021-12-02 13:20:21.953  INFO 22376 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet &#39;dispatcherServlet&#39;
+    2021-12-02 13:20:21.955  INFO 22376 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+  time: Thu, 02 Dec 2021 19:20:22 UTC
+record: 2

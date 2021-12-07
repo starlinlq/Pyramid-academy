@@ -1,0 +1,627 @@
+type: edu
+files:
+- name: build.gradle
+  visible: true
+  text: |-
+    buildscript {
+        apply plugin: 'hyperskill'
+
+        repositories {
+            mavenCentral()
+        }
+        dependencies {
+            classpath "org.springframework.boot:spring-boot-gradle-plugin:$hs.spring.bootVersion"
+            classpath "io.spring.gradle:dependency-management-plugin:$hs.spring.dependencyManagementVersion"
+        }
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    repositories {
+        mavenCentral()
+    }
+
+    sourceSets.main.resources.srcDirs = ["src/resources"]
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.1.0.Final'
+    }
+  learner_created: false
+- name: src/account/AccountServiceApplication.java
+  visible: true
+  text: |-
+    package account;
+
+    import org.springframework.boot.SpringApplication;
+    import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+    @SpringBootApplication
+    public class AccountServiceApplication {
+
+        public static void main(String[] args) {
+            SpringApplication.run(AccountServiceApplication.class, args);
+        }
+
+    }
+  learner_created: false
+- name: src/resources/application.properties
+  visible: true
+  text: |-
+    server.port=28852
+    management.endpoints.web.exposure.include=*
+    management.endpoint.shutdown.enabled=true
+    spring.jackson.serialization.INDENT_OUTPUT=true
+  learner_created: false
+- name: test/AccountServiceTest.java
+  visible: false
+  text: |-
+    import account.AccountServiceApplication;
+    import com.fasterxml.jackson.annotation.JsonInclude;
+    import com.fasterxml.jackson.core.JsonProcessingException;
+    import com.fasterxml.jackson.databind.ObjectMapper;
+    import com.google.gson.JsonObject;
+    import org.hyperskill.hstest.dynamic.DynamicTest;
+    import org.hyperskill.hstest.dynamic.input.DynamicTesting;
+    import org.hyperskill.hstest.exception.outcomes.UnexpectedError;
+    import org.hyperskill.hstest.mocks.web.request.HttpRequest;
+    import org.hyperskill.hstest.mocks.web.response.HttpResponse;
+    import org.hyperskill.hstest.stage.SpringTest;
+    import org.hyperskill.hstest.testcase.CheckResult;
+    import java.util.*;
+    import static org.hyperskill.hstest.common.JsonUtils.getJson;
+    import static org.hyperskill.hstest.common.JsonUtils.getPrettyJson;
+    import static org.hyperskill.hstest.testing.expect.Expectation.expect;
+    import static org.hyperskill.hstest.testing.expect.json.JsonChecker.*;
+
+    class User {
+      private String name;
+      private String lastname;
+      private String email;
+      private String password;
+
+      public User(User another) {
+        this(another.name, another.lastname, another.email, another.password);
+      }
+
+      public User(String name, String lastname, String email, String password) {
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+      }
+
+      public String toJson() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        try {
+          return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+          System.out.println(e.getMessage());
+          return null;
+        }
+      }
+
+      public String getName() {
+        return name;
+      }
+
+      public User setName(String name) {
+        this.name = name;
+        return this;
+      }
+
+      public String getLastname() {
+        return lastname;
+      }
+
+      public User setLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
+      }
+
+      public String getEmail() {
+        return email;
+      }
+
+      public User setEmail(String email) {
+        this.email = email;
+        return this;
+      }
+
+      public String getPassword() {
+        return password;
+      }
+
+      public User setPassword(String password) {
+        this.password = password;
+        return this;
+      }
+    }
+
+    public class AccountServiceTest extends SpringTest {
+
+      private  final String signUpApi = "/api/auth/signup";
+      private  final String paymentApi = "/api/empl/payment";
+      private final User johnDoe = new User("John", "Doe", "JohnDoe@acme.com", "secret");
+      private final User maxMustermann = new User("Max", "Mustermann", "MaxMustermann@acme.com", "secret");
+      private final User captainNemo = new User("Captain", "Nemo", "nautilus@pompilius.com", "wings");
+      private final String johnDoeCorrectUser = johnDoe.toJson();
+      private final String johnDoeEmptyName = new User(johnDoe).setName("").toJson();
+      private final String johnDoeNoName = new User(johnDoe).setName(null).toJson();
+      private final String johnDoeEmptyLastName = new User(johnDoe).setLastname("").toJson();
+      private final String johnDoeNoLastName = new User(johnDoe).setLastname(null).toJson();
+      private final String johnDoeEmptyEmail = new User(johnDoe).setEmail("").toJson();
+      private final String johnDoeNoEmail = new User(johnDoe).setLastname(null).toJson();
+      private final String johnDoeEmptyPassword = new User(johnDoe).setPassword("").toJson();
+      private final String johnDoeNoPassword = new User(johnDoe).setPassword(null).toJson();
+      private final String johnDoeWrongEmail1 = new User(johnDoe).setEmail("johndoeacme.com").toJson();
+      private final String johnDoeWrongEmail2 = new User(johnDoe).setEmail("johndoe@google.com").toJson();
+      private final String maxMustermannCorrectUser = maxMustermann.toJson();
+      private final String johnDoeCorrectUserLower = new User(johnDoe).setEmail(johnDoe.getEmail().toLowerCase()).toJson();
+      private final String maxMustermannCorrectUserLower = new User(maxMustermann).setEmail(maxMustermann.getEmail().toLowerCase()).toJson();
+      private final String johnDoeWrongPassword = new User(johnDoe).setPassword("none").toJson();
+      private final String johnDoeWrongPasswordCaseSensitive = new User(johnDoe).setPassword(johnDoe.getPassword().toUpperCase()).toJson();
+      private final String maxMustermannWrongPassword = new User(maxMustermann).setPassword("none").toJson();
+      private final String captainNemoWrongUser = captainNemo.toJson();
+
+      List<Integer> userIdList = new ArrayList<>();
+
+      public AccountServiceTest() {
+        super(AccountServiceApplication.class, "../service_db.mv.db");
+      }
+
+      /**
+       * Method for checking status code of response Post request for API
+       *
+       * @param api testing api (String)
+       * @param body string representation of body content in JSON format (String)
+       * @param status required http status for response (int)
+       * @return instance of CheckResult class containing result of checks (CheckResult)
+       */
+      CheckResult testPostApi(String api, String body, int status, String message) {
+        HttpResponse response = post(api, body).send();
+
+        if (response.getStatusCode() != status) {
+          return CheckResult.wrong("POST " + api + " should respond with "
+                  + "status code " + status + ", responded: " + response.getStatusCode() + "\n"
+                  + message + "\n"
+                  + "Response body:\n" + response.getContent() + "\n"
+                  + "Request body:\n" + body);
+        }
+        return CheckResult.correct();
+      }
+
+      /**
+       * Method for checking status code of response Get request for API
+       *
+       * @param api testing api (String)
+       * @param status required http status for response (int)
+       * @param message hint about reason of error (String)
+       * @return instance of CheckResult class containing result of checks (CheckResult)
+       */
+      CheckResult testGetApi(String api, int status, String message) {
+        HttpResponse response = get(api).send();
+
+        if (response.getStatusCode() != status) {
+          return CheckResult.wrong("GET " + api + " should respond with "
+                  + "status code " + status + ", responded: " + response.getStatusCode() + "\n"
+                  + message);
+        }
+        return CheckResult.correct();
+      }
+
+      /**
+       * Method for checking response on Post request for signup API
+       *
+       * @param body string representation of body content in JSON format (String)
+       * @param status required http status for response (int)
+       * @return instance of CheckResult class containing result of checks (CheckResult)
+       */
+      CheckResult testPostSignUpResponse(String body, int status) {
+        HttpResponse response = post(signUpApi, body).send();
+        testPostApi(signUpApi, body, status, "API must be available");
+
+        JsonObject rightResponse = getJson(body).getAsJsonObject();
+        rightResponse.remove("password");
+
+        // Check is it JSON in response or something else
+        if (!response.getJson().isJsonObject()) {
+          return CheckResult.wrong("Wrong object in response, expected JSON but was \n" +
+                  response.getContent().getClass());
+
+        }
+
+        JsonObject jsonResponse = response.getJson().getAsJsonObject();
+
+        // Check if password is presence in response
+        if (jsonResponse.get("password") != null) {
+          return CheckResult.wrong("You must remove password from response\n" +
+                  jsonResponse);
+        }
+
+        if (!jsonResponse.get("email").getAsString().endsWith("@acme.com")) {
+          return CheckResult.wrong("Service must accept only corporate emails that end with @acme.com\n" +
+                  jsonResponse);
+        }
+
+        if (jsonResponse.get("id") == null) {
+          return CheckResult.wrong("Response must contain user ID\n" +
+                  "Received response:\n" +
+                  jsonResponse);
+        }
+
+        if (userIdList.contains(jsonResponse.get("id").getAsInt())) {
+          return CheckResult.wrong("User ID must be unique!\n" +
+                  "Received response:\n" +
+                  jsonResponse);
+        }
+        rightResponse.addProperty("id", jsonResponse.get("id").toString());
+        // Check JSON in response
+        expect(response.getContent()).asJson().check(
+                isObject()
+                        .value("id", isInteger())
+                        .value("name", rightResponse.get("name").getAsString())
+                        .value("lastname", rightResponse.get("lastname").getAsString())
+                        .value("email", rightResponse.get("email").getAsString().toLowerCase()));
+        userIdList.add(jsonResponse.get("id").getAsInt());
+        return CheckResult.correct();
+      }
+
+      /**
+       * Method for restarting application
+       *
+       */
+      private CheckResult restartApplication() {
+        try {
+          reloadSpring();
+        } catch (Exception ex) {
+          throw new UnexpectedError(ex.getMessage());
+        }
+        return CheckResult.correct();
+      }
+
+      /**
+       * Method for checking authentication
+       *
+       * @param user string representation of user information in JSON format (String)
+       * @param status required http status for response (int)
+       * @param message hint about reason of error (String)
+       * @return instance of CheckResult class containing result of checks (CheckResult)
+       */
+      private CheckResult testUserRegistration(String user, int status, String message) {
+        JsonObject userJson = getJson(user).getAsJsonObject();
+        String password = userJson.get("password").getAsString();
+        String login = userJson.get("email").getAsString();
+        HttpResponse response = get(paymentApi).basicAuth(login, password).send();
+        if (response.getStatusCode() != status) {
+          return CheckResult.wrong("Get " + paymentApi + " should respond with "
+                  + "status code " + status + ", responded: " + response.getStatusCode() + "\n"
+                  + message + "\n"
+                  + "Authentication with " + login + " / " + password);
+        }
+        // Check JSON in response
+        if (status == 200) {
+          expect(response.getContent()).asJson().check(
+                  isObject()
+                          .value("id", isInteger())
+                          .value("name", userJson.get("name").getAsString())
+                          .value("lastname", userJson.get("lastname").getAsString())
+                          .value("email", userJson.get("email").getAsString().toLowerCase()));
+        }
+        return CheckResult.correct();
+      }
+
+      /**
+       * Method for testing duplicate users
+       *
+       * @param user string representation of user information in JSON format (String)
+       * @return instance of CheckResult class containing result of checks (CheckResult)
+       */
+      private CheckResult testUserDuplicates(String user) {
+        HttpResponse response = post(signUpApi, user).send();
+        // Check error message field in JSON response
+        expect(response.getContent()).asJson().check(
+                isObject()
+                        .value("status", 400)
+                        .value("error", "Bad Request")
+                        .value("message", "User exist!")
+                        .anyOtherValues());
+        return CheckResult.correct();
+      }
+
+      @DynamicTest
+      DynamicTesting[] dt = new DynamicTesting[] {
+
+              // Test user registration on signup api
+              () -> testPostSignUpResponse(johnDoeCorrectUser, 200),
+              () -> testPostApi(signUpApi, johnDoeCorrectUser, 400, "User must be unique!"),
+              () -> testUserDuplicates(johnDoeCorrectUser),
+              () -> testPostApi(signUpApi, johnDoeCorrectUserLower, 400, "User must be unique (ignorecase)!"),
+              () -> testPostSignUpResponse(maxMustermannCorrectUserLower, 200),
+              () -> testPostApi(signUpApi, maxMustermannCorrectUserLower, 400, "User must be unique!"),
+              () -> testPostApi(signUpApi, maxMustermannCorrectUser, 400, "User must be unique (ignorecase)!"),
+
+              // Test wrong POST request for signup api
+              () -> testPostApi(signUpApi, johnDoeEmptyName, 400, "Empty name field!"),
+              () -> testPostApi(signUpApi, johnDoeNoName, 400, "Name field is absent!"),
+              () -> testPostApi(signUpApi, johnDoeEmptyLastName, 400, "Empty lastname field!"),
+              () -> testPostApi(signUpApi, johnDoeNoLastName, 400, "Lastname field is absent!"),
+              () -> testPostApi(signUpApi, johnDoeEmptyEmail, 400, "Empty email field!"),
+              () -> testPostApi(signUpApi, johnDoeNoEmail, 400, "Email field is absent!"),
+              () -> testPostApi(signUpApi, johnDoeEmptyPassword, 400, "Empty password field!"),
+              () -> testPostApi(signUpApi, johnDoeNoPassword, 400, "Password field is absent!"),
+              () -> testPostApi(signUpApi, johnDoeWrongEmail1, 400, "Wrong email!"),
+              () -> testPostApi(signUpApi, johnDoeWrongEmail2, 400, "Wrong email!"),
+
+              // Test authentication, positive tests
+              () -> testUserRegistration(johnDoeCorrectUserLower, 200, "User must login!"),
+              () -> testUserRegistration(johnDoeCorrectUser, 200, "Login case insensitive!"),
+              () -> testUserRegistration(maxMustermannCorrectUserLower, 200, "User must login!"),
+              () -> testUserRegistration(maxMustermannCorrectUser, 200, "Login case insensitive!"),
+
+              // Test authentication, negative tests
+              () -> testUserRegistration(johnDoeWrongPassword, 401, "Wrong password!"),
+              () -> testUserRegistration(johnDoeWrongPasswordCaseSensitive, 401,
+                      "Password must be case sensitive!"),
+              () -> testUserRegistration(johnDoeWrongEmail1, 401, "Wrong user!"),
+              () -> testUserRegistration(maxMustermannWrongPassword, 401, "Wrong password!"),
+              () -> testUserRegistration(captainNemoWrongUser, 401, "Wrong user"),
+              () -> testGetApi(paymentApi, 401, "This api only for authenticated user"),
+
+              // Test persistence
+              () -> restartApplication(),
+              () -> testUserRegistration(johnDoeCorrectUser, 200, "User must login, after restarting!" +
+                      " Check persistence."),
+      };
+    }
+  learner_created: false
+- name: src/account/controllers/AuthController.java
+  visible: true
+  text: |
+    package account.controllers;
+
+    import account.entity.User;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.PostMapping;
+    import org.springframework.web.bind.annotation.RequestBody;
+    import org.springframework.web.bind.annotation.RequestMapping;
+    import org.springframework.web.bind.annotation.RestController;
+
+    import javax.validation.Valid;
+
+    @RestController
+    @RequestMapping("api/auth/signup")
+    public class AuthController {
+
+
+        @PostMapping
+        public ResponseEntity<User> register(@Valid @RequestBody User user){
+            return ResponseEntity.ok(user);
+        }
+    }
+  learner_created: true
+- name: src/account/entity/User.java
+  visible: true
+  text: |
+    package account.entity;
+
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+    import com.fasterxml.jackson.annotation.JsonProperty;
+
+    import javax.validation.constraints.NotBlank;
+    import javax.validation.constraints.Pattern;
+
+    public class User {
+        @NotBlank
+        private String name;
+        @NotBlank
+        private String lastname;
+        @Pattern(regexp = "\\w+@acme.com")
+        private String email;
+        @NotBlank
+        private String password;
+
+        public User(){}
+
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getLastname() {
+            return lastname;
+        }
+
+        public void setLastname(String lastname) {
+            this.lastname = lastname;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+        @JsonIgnore
+        public String getPassword() {
+            return password;
+        }
+        @JsonProperty
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    }
+  learner_created: true
+- name: src/account/services/UserService.java
+  visible: true
+  text: |
+    package account.services;
+
+    public class UserService {
+
+    }
+  learner_created: true
+- name: src/account/config/SecurityConfig.java
+  visible: true
+  learner_created: true
+- name: src/account/config/RestAuthenticationEntryPoint.java
+  visible: true
+  learner_created: true
+- name: src/account/repositories/UserRepo.java
+  visible: true
+  learner_created: true
+- name: src/account/customException/UserNotFoundException.java
+  visible: true
+  learner_created: true
+- name: src/account/customException/UserAlreadyExist.java
+  visible: true
+  learner_created: true
+- name: src/account/controllers/PaymentController.java
+  visible: true
+  learner_created: true
+- name: src/account/security/CompromisedPasswords.java
+  visible: true
+  learner_created: true
+- name: src/account/security/CompromisedPassword.java
+  visible: true
+  learner_created: true
+- name: src/account/customException/PasswordLengthException.java
+  visible: true
+  learner_created: true
+- name: src/account/customException/PasswordHackerDbException.java
+  visible: true
+  learner_created: true
+- name: src/account/customException/SamePasswordException.java
+  visible: true
+  learner_created: true
+feedback_link: https://hyperskill.org/learn/step/16602#comment
+status: Failed
+feedback:
+  message: "Unexpected error in test #1\n\nWe have recorded this bug and will fix\
+    \ it soon.\n\nSubmitted via IDE\n\nOS Mac OS X\nJava 17\nVendor Oracle Corporation\n\
+    Testing library version 8.2\n\njava.lang.NullPointerException: Cannot invoke &quot;com.google.gson.JsonElement.getAsString()&quot;\
+    \ because the return value of &quot;com.google.gson.JsonObject.get(String)&quot;\
+    \ is null\n\tat AccountServiceTest.testPostSignUpResponse(AccountServiceTest.java:185)\n\
+    \tat AccountServiceTest.lambda$new$0(AccountServiceTest.java:279)\n\tat org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$null$2(DynamicTesting.java:289)\n\
+    \tat org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$null$0(DynamicTesting.java:252)\n\
+    \tat org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43)\n\
+    \tat org.hyperskill.hstest.testing.TestRun.test(TestRun.java:87)\n\tat org.hyperskill.hstest.stage.StageTest.start(StageTest.java:116)\n\
+    \tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\
+    \tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)\n\
+    \tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\
+    \tat java.base/java.lang.reflect.Method.invoke(Method.java:568)\n\tat org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)\n\
+    \tat org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)\n\
+    \tat org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)\n\
+    \tat org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)\n\
+    \tat org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)\n\
+    \tat org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)\n\tat org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)\n\
+    \tat org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)\n\tat org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)\n\
+    \tat org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)\n\
+    \tat org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)\n\
+    \tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)\n\tat org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)\n\
+    \tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)\n\tat org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)\n\
+    \tat org.junit.runners.ParentRunner.run(ParentRunner.java:413)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)\n\
+    \tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)\n\
+    \tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)\n\
+    \tat org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)\n\
+    \tat org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)\n\
+    \tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\
+    \tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)\n\
+    \tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\
+    \tat java.base/java.lang.reflect.Method.invoke(Method.java:568)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\
+    \tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\
+    \tat org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)\n\
+    \tat org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)\n\
+    \tat jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source)\n\tat org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:121)\n\
+    \tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\
+    \tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)\n\
+    \tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\
+    \tat java.base/java.lang.reflect.Method.invoke(Method.java:568)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\
+    \tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\
+    \tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)\n\
+    \tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)\n\
+    \tat org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:414)\n\
+    \tat org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)\n\
+    \tat org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)\n\
+    \tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)\n\
+    \tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)\n\
+    \tat org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)\n\
+    \tat java.base/java.lang.Thread.run(Thread.java:833)\n\nPlease find below the\
+    \ output of your program during this failed test.\n\n---\n\n.   ____         \
+    \ _            __ _ _\n /\\\\ / ___&#39;_ __ _ _(_)_ __  __ _ \\ \\ \\ \\\n( (\
+    \ )\\___ | &#39;_ | &#39;_| | &#39;_ \\/ _` | \\ \\ \\ \\\n \\\\/  ___)| |_)|\
+    \ | | | | || (_| |  ) ) ) )\n  &#39;  |____| .__|_| |_|_| |_\\__, | / / / /\n\
+    \ =========|_|==============|___/=/_/_/_/\n :: Spring Boot ::                (v2.5.6)\n\
+    \n2021-12-06 08:32:28.751  INFO 35584 --- [    Test worker] account.AccountServiceApplication\
+    \        : Starting AccountServiceApplication using Java 17 on Starlins-MBP.attlocal.net\
+    \ with PID 35584 (started by starlinlq in /Users/starlinlq/Desktop/Untitled/AccountService/Account\
+    \ Service/task)\n2021-12-06 08:32:28.755  INFO 35584 --- [    Test worker] account.AccountServiceApplication\
+    \        : No active profile set, falling back to default profiles: default\n\
+    2021-12-06 08:32:30.234  INFO 35584 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate\
+    \ : Bootstrapping Spring Data JPA repositories in DEFAULT mode.\n2021-12-06 08:32:30.287\
+    \  INFO 35584 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate :\
+    \ Finished Spring Data repository scanning in 44 ms. Found 1 JPA repository interfaces.\n\
+    2021-12-06 08:32:30.924  INFO 35584 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer\
+    \  : Tomcat initialized with port(s): 28852 (http)\n2021-12-06 08:32:30.936  INFO\
+    \ 35584 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting\
+    \ service [Tomcat]\n2021-12-06 08:32:30.937  INFO 35584 --- [    Test worker]\
+    \ org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache\
+    \ Tomcat/9.0.54]\n2021-12-06 08:32:31.035  INFO 35584 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]\
+    \       : Initializing Spring embedded WebApplicationContext\n2021-12-06 08:32:31.036\
+    \  INFO 35584 --- [    Test worker] w.s.c.ServletWebServerApplicationContext :\
+    \ Root WebApplicationContext: initialization completed in 2182 ms\n2021-12-06\
+    \ 08:32:31.194  INFO 35584 --- [    Test worker] com.zaxxer.hikari.HikariDataSource\
+    \       : HikariPool-1 - Starting...\n2021-12-06 08:32:31.380  INFO 35584 ---\
+    \ [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 -\
+    \ Start completed.\n2021-12-06 08:32:31.388  INFO 35584 --- [    Test worker]\
+    \ o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at &#39;/h2-console&#39;.\
+    \ Database available at &#39;jdbc:h2:file:../service_db&#39;\n2021-12-06 08:32:31.545\
+    \  INFO 35584 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  :\
+    \ HHH000204: Processing PersistenceUnitInfo [name: default]\n2021-12-06 08:32:31.606\
+    \  INFO 35584 --- [    Test worker] org.hibernate.Version                    :\
+    \ HHH000412: Hibernate ORM core version 5.4.32.Final\n2021-12-06 08:32:31.767\
+    \  INFO 35584 --- [    Test worker] o.hibernate.annotations.common.Version   :\
+    \ HCANN000001: Hibernate Commons Annotations {5.1.2.Final}\n2021-12-06 08:32:31.854\
+    \  INFO 35584 --- [    Test worker] org.hibernate.dialect.Dialect            :\
+    \ HHH000400: Using dialect: org.hibernate.dialect.H2Dialect\n2021-12-06 08:32:32.967\
+    \  INFO 35584 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       :\
+    \ HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]\n\
+    2021-12-06 08:32:32.975  INFO 35584 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean\
+    \ : Initialized JPA EntityManagerFactory for persistence unit &#39;default&#39;\n\
+    2021-12-06 08:32:33.010  WARN 35584 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration\
+    \ : spring.jpa.open-in-view is enabled by default. Therefore, database queries\
+    \ may be performed during view rendering. Explicitly configure spring.jpa.open-in-view\
+    \ to disable this warning\n2021-12-06 08:32:33.578  INFO 35584 --- [    Test worker]\
+    \ o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3a51f9ef,\
+    \ org.springframework.security.web.context.SecurityContextPersistenceFilter@20d1c6a,\
+    \ org.springframework.security.web.header.HeaderWriterFilter@412e7932, org.springframework.security.web.authentication.logout.LogoutFilter@46adf143,\
+    \ org.springframework.security.web.authentication.www.BasicAuthenticationFilter@67abd2db,\
+    \ org.springframework.security.web.savedrequest.RequestCacheAwareFilter@639b6c9e,\
+    \ org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7e356f69,\
+    \ org.springframework.security.web.authentication.AnonymousAuthenticationFilter@217f6663,\
+    \ org.springframework.security.web.session.SessionManagementFilter@57b6f872, org.springframework.security.web.access.ExceptionTranslationFilter@7db2cfe9,\
+    \ org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3fa64c0c]\n\
+    2021-12-06 08:32:34.161  INFO 35584 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver\
+    \      : Exposing 14 endpoint(s) beneath base path &#39;/actuator&#39;\n2021-12-06\
+    \ 08:32:34.202  INFO 35584 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer\
+    \  : Tomcat started on port(s): 28852 (http) with context path &#39;&#39;\n2021-12-06\
+    \ 08:32:34.217  INFO 35584 --- [    Test worker] account.AccountServiceApplication\
+    \        : Started AccountServiceApplication in 5.937 seconds (JVM running for\
+    \ 6.822)\n2021-12-06 08:32:34.534  INFO 35584 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]\
+    \       : Initializing Spring DispatcherServlet &#39;dispatcherServlet&#39;\n\
+    2021-12-06 08:32:34.534  INFO 35584 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet\
+    \        : Initializing Servlet &#39;dispatcherServlet&#39;\n2021-12-06 08:32:34.537\
+    \  INFO 35584 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        :\
+    \ Completed initialization in 3 ms"
+  time: Mon, 06 Dec 2021 14:32:35 UTC
+record: -1

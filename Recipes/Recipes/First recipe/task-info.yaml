@@ -179,9 +179,6 @@ files:
 - name: src/recipes/services/RecipeService.java
   visible: true
   learner_created: true
-feedback_link: https://hyperskill.org/learn/step/13088#comment
+feedback_link: https://hyperskill.org/projects/180/stages/917/implement#comment
 status: Solved
-feedback:
-  message: Congratulations!
-  time: Wed, 01 Dec 2021 23:12:28 UTC
-record: 1
+record: 3
